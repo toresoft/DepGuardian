@@ -1,0 +1,36 @@
+{
+  "name": "depguardian",
+  "version": "1.0.0",
+  "description": "An inspector for your Node.js projects that parses lockfiles or SBOMs and confirms the presence of specific packages.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "depGuardian": "./dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toresoft/DepGuardian.git"
+  },
+  "author": "Salvatore Moi",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/toresoft/DepGuardian/issues"
+  },
+  "homepage": "https://github.com/toresoft/DepGuardian#readme",
+  "devDependencies": {
+    "@types/commander": "^2.12.0",
+    "@types/ink": "^0.5.2",
+    "@types/node": "^24.5.2",
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "commander": "^14.0.1",
+    "ink": "^6.3.1",
+    "snyk-nodejs-lockfile-parser": "^2.2.2"
+  },
+  "type": "module"
+}
