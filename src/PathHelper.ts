@@ -1,15 +1,14 @@
 import path from 'node:path';
-import process from 'node:process';
 import * as fs from "node:fs";
 import NotFoundError from "./Error/NotFoundError.js";
 import PermissionDeniedError from "./Error/PermissionDeniedError.js";
 
 class PathHelper {
-    static normalize(filePath: string): string {
+    static normalize(filePath: string, basePath: string): string {
         if(path.isAbsolute(filePath)) {
             return path.normalize(filePath);
         }
-        return path.join(process.cwd(), filePath).normalize();
+        return path.join(basePath, filePath).normalize();
     }
 
     static async check(filePath: string): Promise<void>

@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
-import PathHelper from "./PathHelper.js";
-import path from "node:path";
+import PackageChecker from "./Checker/PackageChecker.js";
 
 const program:Command = new Command();
 program.command('check-package-lock')
@@ -9,15 +8,15 @@ program.command('check-package-lock')
     .argument('<packagesListPath>', '')
     .description('')
     .action(async (packageLockDirPath: string, packagesListPath: string) => {
-        const normalizedPackageLockPath = path.join(PathHelper.normalize(packageLockDirPath), 'package-lock.json');
-        const normalizedPackagePath = path.join(PathHelper.normalize(packageLockDirPath), 'package.json');
-        const normalizedPackagesListPath = PathHelper.normalize(packagesListPath);
-        await Promise.all([
-            PathHelper.check(normalizedPackageLockPath),
-            PathHelper.check(normalizedPackagePath),
-            PathHelper.check(normalizedPackagesListPath)
-        ]);
-
+        try {
+            const checker: PackageChecker = new PackageChecker(process.cwd())
+            await checker.check(packageLockDirPath, packagesListPath);
+        } catch (e) {
+            if(e instanceof Error) {
+                console.error(e.message);
+            }
+            process.exit(1);
+        }
     });
 
 program.parse();
